@@ -69,7 +69,7 @@ module top(
     .o_y(y)
   );
 
-  wire [7:0] rgb[2:0];
+  wire [7:0] rgb[2:0]; // {b, g, r} order, i.e. rgb[0] is red.
 
   // Generate a test picture pattern
   test_pattern t(

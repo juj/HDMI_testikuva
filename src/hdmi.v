@@ -7,8 +7,8 @@ module hdmi(
   input [7:0] rgb[2:0],
   input reset,
 
-  output [3:0] hdmi_tx_n,   
-  output [3:0] hdmi_tx_p    
+  output [3:0] hdmi_tx_n,
+  output [3:0] hdmi_tx_p
 );
   // Encode vsync, hsync, blanking and rgb data to Transition-minimized differential signaling (TMDS) format.
   wire [9:0] tmds_ch0, tmds_ch1, tmds_ch2;

@@ -7,13 +7,11 @@ module tmds_encoder(
   input [7:0] i_data,       // Input 8-bit color
   input [1:0] i_ctrl,       // control data (vsync and hsync)
   input i_display_enable,   // high=pixel data active. low=display is in blanking area
-  output reg [9:0] o_tmds // encoded 10-bit TMDS data
+  output reg [9:0] o_tmds   // encoded 10-bit TMDS data
 );
   wire [1:0] ctrl = {2{~i_reset}} & i_ctrl; // Clear control data if in reset state
-  wire blank = i_reset | ~i_display_enable;    // If high, send blank data (in reset or in image blank)
-
-  wire [3:0] popcnt = $countones(i_data);
-  wire parity = {popcnt, !i_data[0]} > 8;
+  wire blank = i_reset | ~i_display_enable; // If high, send blank data (in reset or in image blank)
+  wire parity = {$countones(i_data), !i_data[0]} > 8;
 
   wire [7:0] enc; // intermediate encoded data packet
   assign enc[0] = i_data[0];
