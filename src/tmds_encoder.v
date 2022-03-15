@@ -11,18 +11,9 @@ module tmds_encoder(
 );
   wire [1:0] ctrl = {2{~i_reset}} & i_ctrl; // Clear control data if in reset state
   wire blank = i_reset | ~i_display_enable; // If high, send blank data (in reset or in image blank)
+
   wire parity = {$countones(i_data), !i_data[0]} > 8;
-
-  wire [7:0] enc; // intermediate encoded data packet
-  assign enc[0] = i_data[0];
-  assign enc[1] = parity ^ enc[0] ^ i_data[1];
-  assign enc[2] = parity ^ enc[1] ^ i_data[2];
-  assign enc[3] = parity ^ enc[2] ^ i_data[3];
-  assign enc[4] = parity ^ enc[3] ^ i_data[4];
-  assign enc[5] = parity ^ enc[4] ^ i_data[5];
-  assign enc[6] = parity ^ enc[5] ^ i_data[6];
-  assign enc[7] = parity ^ enc[6] ^ i_data[7];
-
+  wire [7:0] enc = {{7{parity}} ^ enc[6:0] ^ i_data[7:1], i_data[0]};
   wire [3:0] ones = $countones(enc);
   wire [3:0] zeros = 4'b1000 - ones[3:0];
 
