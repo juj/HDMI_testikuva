@@ -1,0 +1,11 @@
+gwsynthesis
+temp
+*.user
+*.do
+*.bin
+*.binx
+*.db
+*.fs
+*.log
+*.html
+*.timing_paths

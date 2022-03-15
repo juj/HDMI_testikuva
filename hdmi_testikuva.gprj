@@ -3,6 +3,13 @@
 <Project>
     <Template>FPGA</Template>
     <Version>5</Version>
-    <Device name="" pn="">gw1nsr4c-000</Device>
-    <FileList/>
+    <Device name="GW1NSR-4C" pn="GW1NSR-LV4CQN48PC6/I5">gw1nsr4c-000</Device>
+    <FileList>
+        <File path="src/display_signal.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi.v" type="file.verilog" enable="1"/>
+        <File path="src/test_pattern.v" type="file.verilog" enable="1"/>
+        <File path="src/tmds_encoder.v" type="file.verilog" enable="1"/>
+        <File path="src/top.v" type="file.verilog" enable="1"/>
+        <File path="src/pin_constraints.cst" type="file.cst" enable="1"/>
+    </FileList>
 </Project>
