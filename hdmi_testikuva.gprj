@@ -1,0 +1,8 @@
+<?xml version="1" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="" pn="">gw1nsr4c-000</Device>
+    <FileList/>
+</Project>
