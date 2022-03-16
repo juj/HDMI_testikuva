@@ -11,26 +11,26 @@
   <GOWIN Version>: V1.9.8 Education
   <Part Number>: GW1NSR-LV4CQN48PC6/I5
   <Device>: GW1NSR-4C
-  <Created Time>:Wed Mar 16 00:09:38 2022
+  <Created Time>:Thu Mar 17 00:19:03 2022
 
 
 2. PnR Details
 
   Running placement:
-    Placement Phase 0: CPU time = 0h 0m 0.055s, Elapsed time = 0h 0m 0.055s
-    Placement Phase 1: CPU time = 0h 0m 0.088s, Elapsed time = 0h 0m 0.088s
-    Placement Phase 2: CPU time = 0h 0m 0.069s, Elapsed time = 0h 0m 0.069s
+    Placement Phase 0: CPU time = 0h 0m 0.062s, Elapsed time = 0h 0m 0.062s
+    Placement Phase 1: CPU time = 0h 0m 0.093s, Elapsed time = 0h 0m 0.094s
+    Placement Phase 2: CPU time = 0h 0m 0.077s, Elapsed time = 0h 0m 0.077s
     Placement Phase 3: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s
     Total Placement: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s
  Running routing:
-    Routing Phase 0: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0s
-    Routing Phase 1: CPU time = 0h 0m 0.137s, Elapsed time = 0h 0m 0.137s
-    Routing Phase 2: CPU time = 0h 0m 0.426s, Elapsed time = 0h 0m 0.427s
-    Total Routing: CPU time = 0h 0m 0.564s, Elapsed time = 0h 0m 0.564s
+    Routing Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
+    Routing Phase 1: CPU time = 0h 0m 0.143s, Elapsed time = 0h 0m 0.143s
+    Routing Phase 2: CPU time = 0h 0m 0.471s, Elapsed time = 0h 0m 0.471s
+    Total Routing: CPU time = 0h 0m 0.614s, Elapsed time = 0h 0m 0.614s
  Generate output files:
-    CPU time = 0h 0m 0.718s, Elapsed time = 0h 0m 0.718s
+    CPU time = 0h 0m 0.777s, Elapsed time = 0h 0m 0.778s
 
- Total Time and Memory Usage: CPU time = 0h 0m 4s, Elapsed time = 0h 0m 4s, Peak memory usage = 223MB
+ Total Time and Memory Usage: CPU time = 0h 0m 4s, Elapsed time = 0h 0m 4s, Peak memory usage = 196MB
 
 
 3. Resource Usage Summary
