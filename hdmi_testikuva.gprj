@@ -8,7 +8,6 @@
         <File path="src/display_signal.v" type="file.verilog" enable="1"/>
         <File path="src/hdmi.v" type="file.verilog" enable="1"/>
         <File path="src/test_pattern.v" type="file.verilog" enable="1"/>
-        <File path="src/tmds_encoder.v" type="file.verilog" enable="1"/>
         <File path="src/top.v" type="file.verilog" enable="1"/>
         <File path="src/pin_constraints.cst" type="file.cst" enable="1"/>
     </FileList>
