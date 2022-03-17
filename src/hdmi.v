@@ -22,19 +22,10 @@ module tmds_encoder(
   reg signed [4:0] bias;
   wire bias_vs_balance = bias[4] == balance[4]; // track if balance is going away or towards bias
 
+  // encode pixel colour data with at most 5 bit 0<->1 transitions
   always @(posedge i_hdmi_clk) begin
-    if (blank) begin
-      o_tmds <= {~ctrl[1], 9'b101010100} ^ {10{ctrl[0]}};
-      bias <= 0;
-    end else begin // encode pixel colour data with at most 5 bit 0<->1 transitions
-      if (bias == 0 || balance == 0) begin
-        o_tmds <= {10{parity}} ^ {2'b01, enc};
-        bias <= parity ? bias - balance : bias + balance;
-      end else begin
-        o_tmds <= {bias_vs_balance, ~parity, {8{bias_vs_balance}} ^ enc};
-        bias <= bias + ({5{bias_vs_balance}} ^ balance) + {3'b0, bias_vs_balance^parity, bias_vs_balance};
-      end
-    end
+    o_tmds <= blank ? {~ctrl[1], 9'b101010100} ^ {10{ctrl[0]}} : {bias_vs_balance, ~parity, {8{bias_vs_balance}} ^ enc};
+    bias <= blank ? 0 : bias + ({5{bias_vs_balance}} ^ balance) + {3'b0, bias_vs_balance^parity, bias_vs_balance};
   end
 endmodule
 
