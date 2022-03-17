@@ -9,17 +9,17 @@ module tmds_encoder(
   input i_display_enable,   // high=pixel data active. low=display is in blanking area
   output reg [9:0] o_tmds   // encoded 10-bit TMDS data
 );
-  wire [1:0] ctrl = {2{~i_reset}} & i_ctrl; // Clear control data if in reset state
-  wire blank = i_reset | ~i_display_enable; // If high, send blank data (in reset or in image blank)
+  wire [1:0] ctrl = {2{~i_reset}} & i_ctrl; // clear control data if in reset state
+  wire blank = i_reset | ~i_display_enable; // if high, send blank data (in reset or in image blank)
 
-  wire parity = {$countones(i_data), !i_data[0]} > 8; // calculate a xor value based on if ones dominate the input, break ties on lowest bit.
+  wire parity = {$countones(i_data), !i_data[0]} > 8;                 // calculate a xor value based on if ones dominate the input, break ties on lowest bit.
   wire [7:0] enc = {{7{parity}} ^ enc[6:0] ^ i_data[7:1], i_data[0]}; // intermediate encode step
 
-  wire signed [4:0] balance = {4'($countones(enc)),1'b0} - 5'b01000; // Calculate # of ones vs # of zeros bit balance
-  reg signed [4:0] bias; // keep a record of bit bias of previously sent data
-  wire bias_vs_balance = bias[4] == balance[4]; // track from sign bits if balance is going away or towards bias
+  wire signed [4:0] balance = {4'($countones(enc)),1'b0} - 5'b01000; // calculate # of ones vs # of zeros bit balance
+  reg signed [4:0] bias;                                             // keep a record of bit bias of previously sent data
+  wire bias_vs_balance = (bias[4] == balance[4]);                    // track from sign bits if balance is going away or towards bias
 
-  // encode pixel colour data with at most 5 bit 0<->1 transitions
+  // encode pixel color data with at most 5 bit 0<->1 transitions, and update bias count.
   always @(posedge i_hdmi_clk) begin
     o_tmds <= blank ? {~ctrl[1], 9'b101010100} ^ {10{ctrl[0]}} : {bias_vs_balance, ~parity, {8{bias_vs_balance}} ^ enc};
     bias <= blank ? 0 : 5'(bias + ({5{bias_vs_balance}} ^ balance) + {3'b0, bias_vs_balance^parity, bias_vs_balance});
