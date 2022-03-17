@@ -8,7 +8,7 @@ module test_pattern #(
   input i_disp_enable,
   input [12:0] x,
   input [12:0] y,
-  output reg [7:0] o_rgb[2:0]
+  output reg [23:0] o_rgb
 );
   wire [12:0] i_x = x * 13'd2 / 13'd5; // 2/5 equals * 256 / 640
   wire [12:0] i_y = y * 13'd2 / 13'd5; // 2/5 equal  * 192 / 480

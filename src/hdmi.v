@@ -31,7 +31,7 @@ module hdmi(
   input hdmi_clk,
   input hdmi_clk_5x,
   input [2:0] hve_sync, // Image sync signals: { display_enable, vsync, hsync }
-  input [7:0] rgb[2:0],
+  input [23:0] rgb,
   input reset,
 
   output [3:0] hdmi_tx_n,
@@ -39,9 +39,9 @@ module hdmi(
 );
   // Encode vsync, hsync, blanking and rgb data to Transition-minimized differential signaling (TMDS) format.
   wire [9:0] tmds_ch0, tmds_ch1, tmds_ch2;
-  tmds_encoder encode_ch0(.i_hdmi_clk(hdmi_clk), .i_reset(reset), .i_data(rgb[2]), .i_ctrl(hve_sync[1:0]), .i_display_enable(hve_sync[2]), .o_tmds(tmds_ch0));
-  tmds_encoder encode_ch1(.i_hdmi_clk(hdmi_clk), .i_reset(reset), .i_data(rgb[1]), .i_ctrl(2'b00),         .i_display_enable(hve_sync[2]), .o_tmds(tmds_ch1));
-  tmds_encoder encode_ch2(.i_hdmi_clk(hdmi_clk), .i_reset(reset), .i_data(rgb[0]), .i_ctrl(2'b00),         .i_display_enable(hve_sync[2]), .o_tmds(tmds_ch2));
+  tmds_encoder encode_b(.i_hdmi_clk(hdmi_clk), .i_reset(reset), .i_data(rgb[23:16]), .i_ctrl(hve_sync[1:0]), .i_display_enable(hve_sync[2]), .o_tmds(tmds_ch0));
+  tmds_encoder encode_g(.i_hdmi_clk(hdmi_clk), .i_reset(reset), .i_data(rgb[15:8]),  .i_ctrl(2'b00),         .i_display_enable(hve_sync[2]), .o_tmds(tmds_ch1));
+  tmds_encoder encode_r(.i_hdmi_clk(hdmi_clk), .i_reset(reset), .i_data(rgb[7:0]),   .i_ctrl(2'b00),         .i_display_enable(hve_sync[2]), .o_tmds(tmds_ch2));
 
   // Serialize the three 10-bit TMDS channels to four serial 1-bit TMDS streams. (Gowin FPGA Designer/Sipeed Tang Nano 4K specific module)
   wire serial_tmds[4];
