@@ -28,7 +28,7 @@ module top(
   // Divide the 5x HDMI clock to produce the 1x HDMI clock (Gowin FPGA Designer/Sipeed Tang Nano 4K specific module)
   CLKDIV #(.DIV_MODE("5"), .GSREN("false")) hdmi_clock_div(.CLKOUT(hdmi_clk), .HCLKIN(hdmi_clk_5x), .RESETN(hdmi_clk_lock), .CALIB(1'b1));
 
-  wire reset = !hdmi_clk_lock || !reset_button;
+  wire reset = ~hdmi_clk_lock | ~reset_button;
   wire signed [12:0] x, y;        // horizontal and vertical screen position (signed), -4096 - +4095
   wire [2:0] hve_sync;            // pack the image sync signals to one vector: { display enable, vsync, hsync }
 

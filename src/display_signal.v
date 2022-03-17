@@ -1,5 +1,4 @@
 // display_signal module converts a pixel clock into a hsync+vsync+disp_enable+x+y structure.
-
 module display_signal #(
   H_RESOLUTION    = 640,
   V_RESOLUTION    = 480,
@@ -16,19 +15,21 @@ module display_signal #(
   input  i_pixel_clk,
   input  i_reset,               // reset is active high
   output [2:0] o_hvesync,       // { display_enable, vsync, hsync} . hsync is active at desired H_SYNC_POLARITY and vsync is active at desired V_SYNC_POLARITY, display_enable is active high, low in blanking
-  output o_frame_start,         // momentarily high during the first clock of a frame (when inside blanking/front porches)
-  output reg signed [12:0] o_x, // horizontal beam position (including blanking)
-  output reg signed [12:0] o_y  // vertical beam position (including blanking)
+  output o_frame_start,         // counts high for one pixel clock of a frame (inside blanking)
+  output reg signed [12:0] o_x, // screen x coordinate (negative in blanking, nonneg in visible picture area)
+  output reg signed [12:0] o_y  // screen y coordinate (negative in blanking, nonneg in visible picture area)
 );
 
-  localparam signed H_START       = -H_FRONT_PORCH - H_SYNC - H_BACK_PORCH;
-  localparam signed HSYNC_START   = H_START + H_FRONT_PORCH;
-  localparam signed HSYNC_END     = HSYNC_START + H_SYNC;
+  // A horizontal scanline consists of sequence of regions: back porch -> sync -> front porch -> display visible
+  localparam signed H_START       = -H_BACK_PORCH - H_SYNC - H_FRONT_PORCH;
+  localparam signed HSYNC_START   = -H_BACK_PORCH - H_SYNC;
+  localparam signed HSYNC_END     = -H_BACK_PORCH;
   localparam signed HACTIVE_START = 0;
   localparam signed HACTIVE_END   = H_RESOLUTION - 1;
-  localparam signed V_START       = -V_FRONT_PORCH - V_SYNC - V_BACK_PORCH;
-  localparam signed VSYNC_START   = V_START + V_FRONT_PORCH;
-  localparam signed VSYNC_END     = VSYNC_START + V_SYNC;
+  // Vertical image frame has the same structure, but counts scanlines instead of pixel clocks.
+  localparam signed V_START       = -V_BACK_PORCH - V_SYNC - V_FRONT_PORCH;
+  localparam signed VSYNC_START   = -V_BACK_PORCH - V_SYNC;
+  localparam signed VSYNC_END     = -V_BACK_PORCH;
   localparam signed VACTIVE_START = 0;
   localparam signed VACTIVE_END   = V_RESOLUTION - 1;
 
@@ -37,9 +38,11 @@ module display_signal #(
                        1'(V_SYNC_POLARITY) ^ (o_y > VSYNC_START && o_y <= VSYNC_END),
                        1'(H_SYNC_POLARITY) ^ (o_x > HSYNC_START && o_x <= HSYNC_END) };
 
-  // high for one pixel clock at the beginning of a new frame (inside hblank and vblank)
+  // counts high for one pixel clock at the beginning of a new frame (inside hblank and vblank)
   assign o_frame_start = (o_y == V_START && o_x == H_START);
 
+  // count frame x & y pixel coordinates. Values < 0 denote pixels inside blanking/vsync area,
+  // values >= 0 denote visible image. (x,y)==(0,0) is top left.
   always @(posedge i_pixel_clk) begin
     if (i_reset) begin
       o_x <= H_START;

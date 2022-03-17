@@ -1,5 +1,4 @@
 // test_pattern module generates a test picture that looks like the Telefunken FuBK standard: https://fi.wikipedia.org/wiki/Testikuva
-
 module test_pattern #(
   H_RESOLUTION = 640,
   V_RESOLUTION = 480
@@ -9,10 +8,10 @@ module test_pattern #(
   input i_disp_enable,
   input [12:0] x,
   input [12:0] y,
-  output reg [7:0] o_rgb[2:0]);
-
-  wire [12:0] i_x = x * 13'd2 / 13'd5; // * 256 / H_RESOLUTION
-  wire [12:0] i_y = y * 13'd2 / 13'd5; // * 192 / V_RESOLUTION
+  output reg [7:0] o_rgb[2:0]
+);
+  wire [12:0] i_x = x * 13'd2 / 13'd5; // 2/5 equals * 256 / 640
+  wire [12:0] i_y = y * 13'd2 / 13'd5; // 2/5 equal  * 192 / 480
 
   localparam signed CIRCLE_X = 13'd130;
   localparam signed CIRCLE_Y = 13'd96;
