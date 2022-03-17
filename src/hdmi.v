@@ -12,20 +12,17 @@ module tmds_encoder(
   wire [1:0] ctrl = {2{~i_reset}} & i_ctrl; // Clear control data if in reset state
   wire blank = i_reset | ~i_display_enable; // If high, send blank data (in reset or in image blank)
 
-  wire parity = {$countones(i_data), !i_data[0]} > 8;
-  wire [7:0] enc = {{7{parity}} ^ enc[6:0] ^ i_data[7:1], i_data[0]};
-  wire [3:0] ones = $countones(enc);
-  wire [3:0] zeros = 4'b1000 - ones[3:0];
+  wire parity = {$countones(i_data), !i_data[0]} > 8; // calculate a xor value based on if ones dominate the input, break ties on lowest bit.
+  wire [7:0] enc = {{7{parity}} ^ enc[6:0] ^ i_data[7:1], i_data[0]}; // intermediate encode step
 
-  // current 1 vs 0 balance, and bias of previously sent data
-  wire signed [4:0] balance = $signed({1'b0,ones}) - $signed({1'b0,zeros});
-  reg signed [4:0] bias;
-  wire bias_vs_balance = bias[4] == balance[4]; // track if balance is going away or towards bias
+  wire signed [4:0] balance = {4'($countones(enc)),1'b0} - 5'b01000; // Calculate # of ones vs # of zeros bit balance
+  reg signed [4:0] bias; // keep a record of bit bias of previously sent data
+  wire bias_vs_balance = bias[4] == balance[4]; // track from sign bits if balance is going away or towards bias
 
   // encode pixel colour data with at most 5 bit 0<->1 transitions
   always @(posedge i_hdmi_clk) begin
     o_tmds <= blank ? {~ctrl[1], 9'b101010100} ^ {10{ctrl[0]}} : {bias_vs_balance, ~parity, {8{bias_vs_balance}} ^ enc};
-    bias <= blank ? 0 : bias + ({5{bias_vs_balance}} ^ balance) + {3'b0, bias_vs_balance^parity, bias_vs_balance};
+    bias <= blank ? 0 : 5'(bias + ({5{bias_vs_balance}} ^ balance) + {3'b0, bias_vs_balance^parity, bias_vs_balance});
   end
 endmodule
 
