@@ -47,9 +47,9 @@ module display_signal #(
     end else begin
       if (o_x == HACTIVE_END) begin
         o_x <= H_START;
-        o_y <= o_y == VACTIVE_END ? 13'(V_START) : o_y + 13'b1;
+        o_y <= o_y == VACTIVE_END ? 13'(V_START) : o_y + 1'b1;
       end else
-        o_x <= o_x + 13'b1;
+        o_x <= o_x + 1'b1;
     end
   end
 endmodule
