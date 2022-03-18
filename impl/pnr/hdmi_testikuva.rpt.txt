@@ -11,26 +11,26 @@
   <GOWIN Version>: V1.9.8 Education
   <Part Number>: GW1NSR-LV4CQN48PC6/I5
   <Device>: GW1NSR-4C
-  <Created Time>:Thu Mar 17 15:20:14 2022
+  <Created Time>:Fri Mar 18 23:00:17 2022
 
 
 2. PnR Details
 
   Running placement:
-    Placement Phase 0: CPU time = 0h 0m 0.054s, Elapsed time = 0h 0m 0.053s
-    Placement Phase 1: CPU time = 0h 0m 0.094s, Elapsed time = 0h 0m 0.095s
-    Placement Phase 2: CPU time = 0h 0m 0.072s, Elapsed time = 0h 0m 0.072s
-    Placement Phase 3: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s
-    Total Placement: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s
+    Placement Phase 0: CPU time = 0h 0m 0.027s, Elapsed time = 0h 0m 0.027s
+    Placement Phase 1: CPU time = 0h 0m 0.055s, Elapsed time = 0h 0m 0.055s
+    Placement Phase 2: CPU time = 0h 0m 0.036s, Elapsed time = 0h 0m 0.036s
+    Placement Phase 3: CPU time = 0h 0m 0.709s, Elapsed time = 0h 0m 0.709s
+    Total Placement: CPU time = 0h 0m 0.827s, Elapsed time = 0h 0m 0.827s
  Running routing:
     Routing Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Routing Phase 1: CPU time = 0h 0m 0.149s, Elapsed time = 0h 0m 0.149s
-    Routing Phase 2: CPU time = 0h 0m 0.534s, Elapsed time = 0h 0m 0.535s
-    Total Routing: CPU time = 0h 0m 0.683s, Elapsed time = 0h 0m 0.684s
+    Routing Phase 1: CPU time = 0h 0m 0.075s, Elapsed time = 0h 0m 0.075s
+    Routing Phase 2: CPU time = 0h 0m 0.283s, Elapsed time = 0h 0m 0.283s
+    Total Routing: CPU time = 0h 0m 0.358s, Elapsed time = 0h 0m 0.358s
  Generate output files:
-    CPU time = 0h 0m 0.794s, Elapsed time = 0h 0m 0.793s
+    CPU time = 0h 0m 0.414s, Elapsed time = 0h 0m 0.414s
 
- Total Time and Memory Usage: CPU time = 0h 0m 3s, Elapsed time = 0h 0m 3s, Peak memory usage = 149MB
+ Total Time and Memory Usage: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s, Peak memory usage = 137MB
 
 
 3. Resource Usage Summary
@@ -46,14 +46,14 @@
     --Logic Register as FF    | 109/3456  3%
     --I/O Register as Latch   | 0/117  0%
     --I/O Register as FF      | 0/117  0%
-  CLS                         | 356/2304  15%
+  CLS                         | 350/2304  15%
   I/O Port                    | 10
   I/O Buf                     | 6
     --Input Buf               | 2
     --Output Buf              | 4
     --Inout Buf               | 0
-  IOLOGIC                     | 15%
-    --OSER10                  | 4
+  IOLOGIC                     | 11%
+    --OSER10                  | 3
   BSRAM                       | 0%
   DSP                         | 12%
     --MULTADDALU18X18         | 1
@@ -86,7 +86,7 @@
   Global Clock  | Usage       
   -------------------------------
   PRIMARY       | 1/8(12%)
-  SECONDARY     | 2/8(25%)
+  SECONDARY     | 1/8(12%)
   GCLK_PIN      | 1/5(20%)
   PLL           | 1/2(50%)
   CLKDIV        | 1/6(16%)
@@ -101,7 +101,6 @@
   -------------------------------------------
   hdmi_clk       | PRIMARY        |  LEFT RIGHT
   reset          | SECONDARY      |  -
-  hve_sync[2]    | SECONDARY      |  -
   hdmi_clk_5x    | HCLK           | RIGHT[1]
   ===========================================
 
