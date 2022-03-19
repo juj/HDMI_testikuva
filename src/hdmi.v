@@ -1,6 +1,7 @@
 // tmds_encoder performs Transition-minimized differential signaling (TMDS) encoding of
 // 8-bits of pixel data and 2-bits of control data to a 10-bit TMDS encoded format.
 // Requires synthesizing with System Verilog 2017.
+// For details of DVI, see https://glenwing.github.io/docs/DVI-1.0.pdf
 module tmds_encoder(
   input i_hdmi_clk,         // HDMI pixel clock
   input i_reset,            // reset (active high)
