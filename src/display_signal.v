@@ -21,22 +21,22 @@ module display_signal #(
 );
 
   // A horizontal scanline consists of sequence of regions: back porch -> sync -> front porch -> display visible
-  localparam signed H_START       = -H_BACK_PORCH - H_SYNC - H_FRONT_PORCH;
-  localparam signed HSYNC_START   = -H_BACK_PORCH - H_SYNC;
-  localparam signed HSYNC_END     = -H_BACK_PORCH;
+  localparam signed H_START       = -H_FRONT_PORCH - H_SYNC - H_BACK_PORCH;
+  localparam signed HSYNC_START   = -H_FRONT_PORCH - H_SYNC;
+  localparam signed HSYNC_END     = -H_FRONT_PORCH;
   localparam signed HACTIVE_START = 0;
   localparam signed HACTIVE_END   = H_RESOLUTION - 1;
   // Vertical image frame has the same structure, but counts scanlines instead of pixel clocks.
-  localparam signed V_START       = -V_BACK_PORCH - V_SYNC - V_FRONT_PORCH;
-  localparam signed VSYNC_START   = -V_BACK_PORCH - V_SYNC;
-  localparam signed VSYNC_END     = -V_BACK_PORCH;
+  localparam signed V_START       = -V_FRONT_PORCH - V_SYNC - V_BACK_PORCH;
+  localparam signed VSYNC_START   = -V_FRONT_PORCH - V_SYNC;
+  localparam signed VSYNC_END     = -V_FRONT_PORCH;
   localparam signed VACTIVE_START = 0;
   localparam signed VACTIVE_END   = V_RESOLUTION - 1;
 
   // generate display_enable, vsync and hsync signals with desired polarity
   assign o_hvesync = { o_x >= 0 && o_y >= 0, // display enable is high when in visible picture area
-                       1'(V_SYNC_POLARITY) ^ (o_y > VSYNC_START && o_y <= VSYNC_END),
-                       1'(H_SYNC_POLARITY) ^ (o_x > HSYNC_START && o_x <= HSYNC_END) };
+                       1'(V_SYNC_POLARITY) ^ (o_y >= VSYNC_START && o_y < VSYNC_END),
+                       1'(H_SYNC_POLARITY) ^ (o_x >= HSYNC_START && o_x < HSYNC_END) };
 
   // counts high for one pixel clock at the beginning of a new frame (inside hblank and vblank)
   assign o_frame_start = (o_y == V_START && o_x == H_START);
