@@ -20,16 +20,16 @@ module display_signal #(
   output reg signed [12:0] o_y  // screen y coordinate (negative in blanking, nonneg in visible picture area)
 );
 
-  // A horizontal scanline consists of sequence of regions: back porch -> sync -> front porch -> display visible
-  localparam signed H_START       = -H_FRONT_PORCH - H_SYNC - H_BACK_PORCH;
-  localparam signed HSYNC_START   = -H_FRONT_PORCH - H_SYNC;
-  localparam signed HSYNC_END     = -H_FRONT_PORCH;
+  // A horizontal scanline consists of sequence of regions: front porch -> sync -> back porch -> display visible
+  localparam signed H_START       = -H_BACK_PORCH - H_SYNC - H_FRONT_PORCH;
+  localparam signed HSYNC_START   = -H_BACK_PORCH - H_SYNC;
+  localparam signed HSYNC_END     = -H_BACK_PORCH;
   localparam signed HACTIVE_START = 0;
   localparam signed HACTIVE_END   = H_RESOLUTION - 1;
   // Vertical image frame has the same structure, but counts scanlines instead of pixel clocks.
-  localparam signed V_START       = -V_FRONT_PORCH - V_SYNC - V_BACK_PORCH;
-  localparam signed VSYNC_START   = -V_FRONT_PORCH - V_SYNC;
-  localparam signed VSYNC_END     = -V_FRONT_PORCH;
+  localparam signed V_START       = -V_BACK_PORCH - V_SYNC - V_FRONT_PORCH;
+  localparam signed VSYNC_START   = -V_BACK_PORCH - V_SYNC;
+  localparam signed VSYNC_END     = -V_BACK_PORCH;
   localparam signed VACTIVE_START = 0;
   localparam signed VACTIVE_END   = V_RESOLUTION - 1;
 

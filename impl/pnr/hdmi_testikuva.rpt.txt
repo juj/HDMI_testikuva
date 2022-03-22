@@ -11,26 +11,26 @@
   <GOWIN Version>: V1.9.8 Education
   <Part Number>: GW1NSR-LV4CQN48PC6/I5
   <Device>: GW1NSR-4C
-  <Created Time>:Mon Mar 21 21:10:04 2022
+  <Created Time>:Tue Mar 22 23:06:26 2022
 
 
 2. PnR Details
 
   Running placement:
-    Placement Phase 0: CPU time = 0h 0m 0.027s, Elapsed time = 0h 0m 0.027s
+    Placement Phase 0: CPU time = 0h 0m 0.025s, Elapsed time = 0h 0m 0.025s
     Placement Phase 1: CPU time = 0h 0m 0.055s, Elapsed time = 0h 0m 0.055s
-    Placement Phase 2: CPU time = 0h 0m 0.04s, Elapsed time = 0h 0m 0.04s
-    Placement Phase 3: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s
-    Total Placement: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s
+    Placement Phase 2: CPU time = 0h 0m 0.033s, Elapsed time = 0h 0m 0.033s
+    Placement Phase 3: CPU time = 0h 0m 0.623s, Elapsed time = 0h 0m 0.624s
+    Total Placement: CPU time = 0h 0m 0.736s, Elapsed time = 0h 0m 0.737s
  Running routing:
-    Routing Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Routing Phase 1: CPU time = 0h 0m 0.08s, Elapsed time = 0h 0m 0.079s
-    Routing Phase 2: CPU time = 0h 0m 0.292s, Elapsed time = 0h 0m 0.292s
-    Total Routing: CPU time = 0h 0m 0.372s, Elapsed time = 0h 0m 0.371s
+    Routing Phase 0: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0s
+    Routing Phase 1: CPU time = 0h 0m 0.071s, Elapsed time = 0h 0m 0.072s
+    Routing Phase 2: CPU time = 0h 0m 0.246s, Elapsed time = 0h 0m 0.246s
+    Total Routing: CPU time = 0h 0m 0.318s, Elapsed time = 0h 0m 0.318s
  Generate output files:
-    CPU time = 0h 0m 0.434s, Elapsed time = 0h 0m 0.434s
+    CPU time = 0h 0m 0.416s, Elapsed time = 0h 0m 0.417s
 
- Total Time and Memory Usage: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s, Peak memory usage = 142MB
+ Total Time and Memory Usage: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s, Peak memory usage = 136MB
 
 
 3. Resource Usage Summary
@@ -38,15 +38,15 @@
   ----------------------------------------------------------
   Resources                   | Usage
   ----------------------------------------------------------
-  Logic                       | 642/4608  13%
-    --LUT,ALU,ROM16           | 642(578 LUT, 64 ALU, 0 ROM16)
+  Logic                       | 595/4608  12%
+    --LUT,ALU,ROM16           | 595(531 LUT, 64 ALU, 0 ROM16)
     --SSRAM(RAM16)            | 0
   Register                    | 109/3573  3%
     --Logic Register as Latch | 0/3456  0%
     --Logic Register as FF    | 109/3456  3%
     --I/O Register as Latch   | 0/117  0%
     --I/O Register as FF      | 0/117  0%
-  CLS                         | 380/2304  16%
+  CLS                         | 345/2304  14%
   I/O Port                    | 10
   I/O Buf                     | 6
     --Input Buf               | 2
@@ -86,7 +86,7 @@
   Global Clock  | Usage       
   -------------------------------
   PRIMARY       | 1/8(12%)
-  SECONDARY     | 2/8(25%)
+  SECONDARY     | 1/8(12%)
   GCLK_PIN      | 1/5(20%)
   PLL           | 1/2(50%)
   CLKDIV        | 1/6(16%)
@@ -101,7 +101,6 @@
   -------------------------------------------
   hdmi_clk       | PRIMARY        |  LEFT RIGHT
   reset          | SECONDARY      |  -
-  hve_sync[2]    | SECONDARY      |  -
   hdmi_clk_5x    | HCLK           | RIGHT[1]
   ===========================================
 
