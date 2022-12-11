@@ -52,8 +52,8 @@ module hdmi(
 
   // Encode the 1-bit serial TMDS streams to Low-voltage differential signaling (LVDS) HDMI output pins. (Gowin FPGA Designer/Sipeed Tang Nano 4K specific module)
   // To understand TMDS and LVDS, see e.g. https://www.youtube.com/watch?v=3xZsTBEUkFI
-  TLVDS_OBUF OBUFDS_clock(.I(hdmi_clk),       .O(hdmi_tx_p[3]), .OB(hdmi_tx_n[3]));
-  TLVDS_OBUF OBUFDS_red  (.I(serial_tmds[2]), .O(hdmi_tx_p[2]), .OB(hdmi_tx_n[2]));
-  TLVDS_OBUF OBUFDS_green(.I(serial_tmds[1]), .O(hdmi_tx_p[1]), .OB(hdmi_tx_n[1]));
-  TLVDS_OBUF OBUFDS_blue (.I(serial_tmds[0]), .O(hdmi_tx_p[0]), .OB(hdmi_tx_n[0]));
+  ELVDS_OBUF OBUFDS_clock(.I(hdmi_clk),       .O(hdmi_tx_p[3]), .OB(hdmi_tx_n[3]));
+  ELVDS_OBUF OBUFDS_red  (.I(serial_tmds[2]), .O(hdmi_tx_p[2]), .OB(hdmi_tx_n[2]));
+  ELVDS_OBUF OBUFDS_green(.I(serial_tmds[1]), .O(hdmi_tx_p[1]), .OB(hdmi_tx_n[1]));
+  ELVDS_OBUF OBUFDS_blue (.I(serial_tmds[0]), .O(hdmi_tx_p[0]), .OB(hdmi_tx_n[0]));
 endmodule
