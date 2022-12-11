@@ -1,0 +1,20 @@
+//Copyright (C)2014-2022 Gowin Semiconductor Corporation.
+//All rights reserved. 
+//File Title: Physical Constraints file
+//GOWIN Version: 1.9.8.09 Education
+//Part Number: GW1NR-LV9QN88PC6/I5
+//Device: GW1NR-9C
+//Created Time: Sat 12 10 20:44:47 2022
+
+IO_LOC "hdmi_tx_p[0]" 71,70;
+IO_PORT "hdmi_tx_p[0]" PULL_MODE=NONE DRIVE=8;
+IO_LOC "hdmi_tx_p[1]" 73,72;
+IO_PORT "hdmi_tx_p[1]" PULL_MODE=NONE DRIVE=8;
+IO_LOC "hdmi_tx_p[2]" 75,74;
+IO_PORT "hdmi_tx_p[2]" PULL_MODE=NONE DRIVE=8;
+IO_LOC "hdmi_tx_p[3]" 69,68;
+IO_PORT "hdmi_tx_p[3]" PULL_MODE=NONE DRIVE=8;
+IO_LOC "reset_button" 3;
+IO_PORT "reset_button" PULL_MODE=UP;
+IO_LOC "clk" 52;
+IO_PORT "clk" PULL_MODE=UP;
