@@ -6,6 +6,8 @@
     <Device name="GW1NSR-4C" pn="GW1NSR-LV4CQN48PC6/I5">gw1nsr4c-000</Device>
     <FileList>
         <File path="src/display_signal.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_clkdiv/Gowin_CLKDIV_5.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_pllvr/Gowin_PLLVR_27MHz_to_126MHz.v" type="file.verilog" enable="1"/>
         <File path="src/hdmi.v" type="file.verilog" enable="1"/>
         <File path="src/test_pattern.v" type="file.verilog" enable="1"/>
         <File path="src/top.v" type="file.verilog" enable="1"/>

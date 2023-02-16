@@ -15,18 +15,31 @@ module top(
 
   // Produce a 5x HDMI clock for pixel serialization (Gowin FPGA Designer/Sipeed Tang Nano 4K specific module)
   // CLKOUT frequency=(FCLKIN*(FBDIV_SEL+1))/(IDIV_SEL+1) = 27*(13+1)/(2+1) = 126 MHz
-  PLLVR #(
-    .FCLKIN("27"),
-    .FBDIV_SEL(13),
-    .IDIV_SEL(2)
-  )hdmi_pll(/*unused pins:*/.CLKOUTP(), .CLKOUTD(), .CLKOUTD3(), .RESET(1'b0), .RESET_P(1'b0), .CLKFB(1'b0), .FBDSEL(6'b0), .IDSEL(6'b0), .ODSEL(6'b0), .PSDA(4'b0), .DUTYDA(4'b0), .FDLY(4'b0), .VREN(1'b1),
-    .CLKIN(clk),
-    .CLKOUT(hdmi_clk_5x),
-    .LOCK(hdmi_clk_lock)
-  );
+
+//--------Copy here to design--------
+
+    Gowin_PLLVR_27MHz_to_126MHz pllvr1(
+        .clkout(hdmi_clk_5x), //output clkout
+        .lock(hdmi_clk_lock), //output lock
+        .clkin(clk) //input clkin
+    );
+
+//--------Copy end-------------------
+
 
   // Divide the 5x HDMI clock to produce the 1x HDMI clock (Gowin FPGA Designer/Sipeed Tang Nano 4K specific module)
-  CLKDIV #(.DIV_MODE("5"), .GSREN("false")) hdmi_clock_div(.CLKOUT(hdmi_clk), .HCLKIN(hdmi_clk_5x), .RESETN(hdmi_clk_lock), .CALIB(1'b1));
+
+//--------Copy here to design--------
+
+    Gowin_CLKDIV_5 clkdiv5(
+        .clkout(hdmi_clk), //output clkout
+        .hclkin(hdmi_clk_5x), //input hclkin
+        .resetn(hdmi_clk_lock) //input resetn
+    );
+
+//--------Copy end-------------------
+
+
 
   wire reset = ~hdmi_clk_lock | ~reset_button;
   wire signed [12:0] x, y;        // horizontal and vertical screen position (signed), -4096 - +4095
